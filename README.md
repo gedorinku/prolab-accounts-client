@@ -25,5 +25,15 @@ npm run test
 npm run lint
 ```
 
+### Generate gRPC clients
+
+#### Install protobuf and grpc-web plugin
+https://github.com/grpc/grpc-web#code-generator-plugin
+
+#### Generate
+```
+npm run protoc
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
