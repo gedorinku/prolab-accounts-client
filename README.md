@@ -1,4 +1,5 @@
 # prolab-accounts-client
+[![Build Status](https://travis-ci.com/ProgrammingLab/prolab-accounts-client.svg?branch=master)](https://travis-ci.com/ProgrammingLab/prolab-accounts-client)
 
 ## Project setup
 ```
