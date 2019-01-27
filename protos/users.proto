@@ -1,0 +1,88 @@
+syntax = "proto3";
+option go_package = "api_pb";
+package com.github.ProgrammingLab.prolab_accounts.api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service UserService {
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse) {
+    option (google.api.http) = {
+      get: "/users"
+    };
+  }
+  rpc GetUser (GetUserRequest) returns (User) {
+    option (google.api.http) = {
+      get: "/users/{user_id}"
+    };
+  }
+  rpc CreateUser (CreateUserRequest) returns (User) {
+    option (google.api.http) = {
+      post: "/users"
+      body: "user"
+    };
+  }
+  rpc GetCurrentUser (GetCurrentUserRequest) returns (User) {
+    option (google.api.http) = {
+      get: "/user"
+    };
+  }
+  rpc UpdateUser (UpdateUserRequest) returns (User) {
+    option (google.api.http) = {
+      patch: "/user"
+      body: "user"
+    };
+  }
+  rpc UpdatePassword (UpdatePasswordRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/user/password"
+    };
+  }
+}
+
+message User {
+  uint32 user_id = 1;
+  string name = 2;
+  string email = 3;
+  string full_name = 4;
+  string avatar_url = 5;
+  string description = 6;
+  int32 grade = 7;
+  bool left = 8;
+  string department = 9;
+  string short_department = 10;
+  string role = 11;
+  string twitter_screen_name = 12;
+  string github_user_name = 13;
+}
+
+message ListUsersRequest {
+  uint32 page_token = 1;
+  int32 page_size = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  uint32 next_page_token = 2;
+}
+
+message GetUserRequest {
+  uint32 user_id = 1;
+}
+
+message CreateUserRequest {
+  User user = 1;
+  string registeration_token = 2;
+}
+
+message GetCurrentUserRequest {}
+
+message UpdateUserRequest {
+  User user = 1;
+}
+
+message UpdatePasswordRequest {
+  string password = 1;
+  string new_password = 2;
+  string new_password_repeat = 3;
+}

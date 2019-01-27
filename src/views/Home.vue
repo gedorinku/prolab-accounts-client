@@ -6,13 +6,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import * as grpcWeb from 'grpc-web';
+import { SessionServiceClient } from '@/api/SessionsServiceClientPb.ts';
+import { CreateSessionRequest, Session } from '@/api//sessions_pb';
 
-@Component({
+export default Vue.extend({
+  name: 'home',
   components: {
     HelloWorld,
   },
-})
-export default class Home extends Vue {}
+  async created() {
+    const cli = new SessionServiceClient('http://localhost:8001', null, null);
+    const req = new CreateSessionRequest();
+    req.setName('gedorinku');
+    req.setPassword('hoge');
+    cli.createSession(req, {}, (err: grpcWeb.Error, resp: Session) => {
+      if (err) {
+        console.log(err.code);
+        console.log(err.message);
+      } else {
+        console.log(resp.getSessionId());
+      }
+    });
+  },
+});
 </script>
