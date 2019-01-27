@@ -1,8 +1,8 @@
 <template>
   <div>
+    <Error :error="challengeError"/>
     <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
-    <div v-else-if="challengeError">セッションが無効です: {{ challengeError }}</div>
-    <div v-else>
+    <div v-else-if="!challengeError">
       <form v-on:submit.prevent="onLogin">
         <div>
           <input required type="text" placeholder="ユーザー名またはメールアドレス" v-model="name">
@@ -13,7 +13,7 @@
         <div>
           <button type="submit">ログイン</button>
         </div>
-        <div v-if="loginError">{{loginError}}</div>
+        <Error :error="loginError"/>
       </form>
     </div>
   </div>
@@ -21,9 +21,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import Error from '@/components/Error.vue';
 
 export default {
   name: 'oauthLogin',
+  components: {
+    Error,
+  },
   data() {
     return {
       name: '',

@@ -1,8 +1,8 @@
 <template>
   <div>
+    <Error :error="challengeError"/>
     <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
-    <div v-else-if="challengeError">セッションが無効です: {{ challengeError }}</div>
-    <div v-else>
+    <div v-else-if="!challengeError">
       <div>{{ client.name }} ({{ client.id }}) が次の権限をリクエストしています</div>
       <div>
         <ul>
@@ -19,9 +19,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import Error from '@/components/Error.vue';
 
 export default {
   name: 'oauthConsent',
+  components: {
+    Error,
+  },
   data() {
     return {
       name: '',
