@@ -60,7 +60,7 @@ export default {
   watch: {
     redirectURL(newURL) {
       if (newURL) {
-        window.location.href = this.newURL;
+        window.location.href = newURL;
       }
     },
   },

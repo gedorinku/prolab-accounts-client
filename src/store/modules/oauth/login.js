@@ -17,6 +17,9 @@ export default {
       state.redirectURL = redirectURL;
       state.challengeError = challengeError;
     },
+    setCheckingChallenge(state, checking) {
+      state.checkingChallenge = checking;
+    },
     setRedirectURL(state, redirectURL) {
       state.redirectURL = redirectURL;
     },
@@ -27,12 +30,17 @@ export default {
   /* eslint no-param-reassign: 2 */
   actions: {
     async startOAuthLogin({ commit }, challenge) {
+      commit('setCheckingChallenge', true);
       try {
         const resp = await oauthClient.startOAuthLogin(challenge);
-        commit('setLoginRequest', resp.data);
+        commit('setLoginRequest', {
+          skip: resp.data.skip,
+          redirectURL: resp.data.redirect_url,
+        });
       } catch (e) {
         commit('setLoginRequest', { challengeError: e });
       }
+      commit('setCheckingChallenge', false);
     },
     async login({ commit }, { challenge, name, password }) {
       try {
