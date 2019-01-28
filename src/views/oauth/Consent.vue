@@ -3,15 +3,24 @@
     <ErrorMessage :error="challengeError"/>
     <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
     <div v-else-if="!challengeError">
-      <div>{{ client.name }} ({{ client.id }}) が次の権限をリクエストしています</div>
       <div>
-        <ul>
-          <li v-for="scope in requestedScopes" v-bind:key="scope">{{ scope }}</li>
-        </ul>
+        <div>{{ client.name }} ({{ client.id }}) by @{{ client.owner }} が次の権限をリクエストしています</div>
+        <div>
+          <figure>
+            <img :src="client.logo_uri">
+          </figure>
+        </div>
       </div>
       <div>
-        <button v-on:click="onAccept()">許可する</button>
-        <button v-on:click="onReject()">許可しない</button>
+        <div>
+          <ul>
+            <li v-for="scope in requestedScopes" v-bind:key="scope">{{ scope }}</li>
+          </ul>
+        </div>
+        <div>
+          <button v-on:click="onAccept()">許可する</button>
+          <button v-on:click="onReject()">許可しない</button>
+        </div>
       </div>
     </div>
   </div>
