@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Error :error="challengeError"/>
+    <ErrorMessage :error="challengeError"/>
     <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
     <div v-else-if="!challengeError">
       <form v-on:submit.prevent="onLogin">
@@ -21,12 +21,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Error from '@/components/Error.vue';
+import ErrorMessage from '@/components/ErrorMessage.vue';
 
 export default {
   name: 'oauthLogin',
   components: {
-    Error,
+    ErrorMessage,
   },
   data() {
     return {
