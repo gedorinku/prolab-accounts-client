@@ -13,7 +13,7 @@
         <div>
           <button type="submit">ログイン</button>
         </div>
-        <Error :error="loginError"/>
+        <ErrorMessage :error="loginError"/>
       </form>
     </div>
   </div>
