@@ -1,30 +1,78 @@
 <template>
-  <div>
+  <div class="container">
     <ErrorMessage :error="challengeError"/>
     <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
     <div v-else-if="!challengeError">
-      <div>
-        <div>{{ client.name }} ({{ client.id }}) by @{{ client.owner }} が次の権限をリクエストしています</div>
+      <div class="client">
+        <figure>
+          <img :src="client.logo_uri">
+        </figure>
         <div>
-          <figure>
-            <img :src="client.logo_uri">
-          </figure>
+          <div class="client-name">{{ client.name }} ({{ client.id }})</div>
+          <div class="client-owner">@{{ client.owner }}</div>
         </div>
       </div>
+      が次の権限をリクエストしています
+      <ul>
+        <li v-for="scope in requestedScopes" v-bind:key="scope">{{ scope }}</li>
+      </ul>
       <div>
-        <div>
-          <ul>
-            <li v-for="scope in requestedScopes" v-bind:key="scope">{{ scope }}</li>
-          </ul>
-        </div>
-        <div>
-          <button v-on:click="onAccept()">許可する</button>
-          <button v-on:click="onReject()">許可しない</button>
-        </div>
+        <button v-on:click="onAccept()">許可する</button>
+        <button v-on:click="onReject()">許可しない</button>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .client {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 1em;
+    margin-bottom: 1em;
+    display: flex;
+  }
+
+  .client figure {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    margin: 0 1em 0 0;
+  }
+
+  .client figure img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
+
+  .client-owner {
+    font-size: 0.7em;
+  }
+
+  button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      appearance: none;
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-decoration: none;
+      background: #668ad8;
+      color: #FFF;
+      border-radius: 3px;
+      margin-right: 1em;
+  }
+</style>
 
 <script>
 import { mapActions, mapState } from 'vuex';

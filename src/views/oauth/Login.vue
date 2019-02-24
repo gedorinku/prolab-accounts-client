@@ -4,7 +4,7 @@
     <div v-if="checkingChallenge">Please Wait</div>
     <div v-else-if="!challengeError">
       <div class="box">
-        <img class="logo" src="./logo.svg" alt="ProLab">
+        <img class="logo" src="../../assets/logo.svg" alt="ProLab">
         <form v-on:submit.prevent="onLogin">
           <label for="id">Name or Email Address</label>
           <input required type="text" v-model="name">
@@ -32,8 +32,8 @@
     margin-bottom: 20px;
   }
 
-  form {
-
+  .box {
+    margin: 0 2em;
   }
 
   input[type="text"], input[type="password"] {
