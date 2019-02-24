@@ -1,23 +1,63 @@
 <template>
-  <div>
+  <div class="container">
     <ErrorMessage :error="challengeError"/>
-    <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
+    <div v-if="checkingChallenge">Please Wait</div>
     <div v-else-if="!challengeError">
-      <form v-on:submit.prevent="onLogin">
-        <div>
-          <input required type="text" placeholder="ユーザー名またはメールアドレス" v-model="name">
-        </div>
-        <div>
-          <input required type="password" placeholder="パスワード" v-model="password">
-        </div>
-        <div>
-          <button type="submit">ログイン</button>
-        </div>
-        <ErrorMessage :error="loginError"/>
-      </form>
+      <div class="box">
+        <img class="logo" src="./logo.svg" alt="ProLab">
+        <form v-on:submit.prevent="onLogin">
+          <label for="id">Name or Email Address</label>
+          <input required type="text" v-model="name">
+          <label for="password">Password</label>
+          <input required type="password" v-model="password">
+          <button type="submit">Log in</button>
+          <ErrorMessage :error="loginError"/>
+        </form>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  img {
+    width: 40%;
+    margin-bottom: 20px;
+  }
+
+  form {
+
+  }
+
+  input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-width: 0 0 2px;
+      margin-bottom: 20px;
+  }
+
+  button[type="submit"] {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      appearance: none;
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-decoration: none;
+      background: #668ad8;
+      color: #FFF;
+      border-radius: 3px;
+  }
+</style>
 
 <script>
 import { mapActions, mapState } from 'vuex';
