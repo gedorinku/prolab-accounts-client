@@ -58,19 +58,19 @@
   }
 
   button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      outline: none;
-      padding: 0;
-      appearance: none;
-      display: inline-block;
-      padding: 0.5em 1em;
-      text-decoration: none;
-      background: #668ad8;
-      color: #FFF;
-      border-radius: 3px;
-      margin-right: 1em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;
+    color: #FFF;
+    border-radius: 3px;
+    margin-right: 1em;
   }
 </style>
 
