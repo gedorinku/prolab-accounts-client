@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ErrorMessage :error="challengeError"/>
-    <div v-if="checkingChallenge">(読み込んでるっぽい画面)</div>
+    <div v-if="checkingChallenge">Please Wait</div>
     <div v-else-if="!challengeError">
       <div class="client">
         <figure>
